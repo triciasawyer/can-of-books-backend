@@ -22,7 +22,7 @@ async function seed(){
   await Book.create([{
     title: '20,000 Leagues Under The Sea',
     description: 'Captain Nemo and his submarine Nautilus, as seen from the perspective of Professor Pierre Aronnax after he, his servant Conseil, and Canadian whaler Ned Land wash up on their ship. On the Nautilus, the three embark on a journey which has them going all around the world, under the sea.',
-    status: true
+    status: true,
   }]);
   console.log('Book 2!!')
 
