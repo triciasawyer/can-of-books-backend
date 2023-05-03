@@ -22,7 +22,7 @@ const PORT = process.env.PORT || 5005;
 app.get('/', (request, response) => response.status(200).send('Welcome!'));
 app.get('/books', getBooks);
 app.post('/books', postBooks);
-// app.delete('/books/:id', deleteBooks);
+app.delete('/books/:id', deleteBooks);
 
 
 
@@ -47,17 +47,17 @@ async function postBooks(request, response, next){
   }
 
 
-  // async function deleteBooks(request, response, next){
-  //   console.log(request.params.id);
-  //   try {
+  async function deleteBooks(request, response, next){
+    console.log(request.params.id);
+    try {
       
-  //     let id = request.params.id;
-  //     await Book.findByIdAndDelete(id);
-  //     response.status(200).send('Book was deleted.');
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
+      let id = request.params.id;
+      await Book.findByIdAndDelete(id);
+      response.status(200).send('Book was deleted.');
+    } catch (error) {
+      next(error);
+    }
+  }
 
 
 
