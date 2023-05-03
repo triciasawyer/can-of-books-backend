@@ -62,8 +62,6 @@ async function postBooks(request, response, next){
 
 
 
-
-
 app.get('*', (request, response) => {
     response.status(404).send('Not available');
 });
