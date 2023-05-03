@@ -15,16 +15,17 @@ mongoose.connect(
     .then(() => console.log('Mongo DB is connected!'))
     .catch(e => console.log(e));
 const Book = require('./models/book.js');
-
-
 const PORT = process.env.PORT || 5005;
 
 
-app.get('/', (request, response) => {
-    response.status(200).send('Welcome!'); 
-});
+app.get('/', (request, response) => response.status(200).send('Welcome!'));
 
 app.get('/books', getBooks);
+app.post('/books', postBooks);
+// app.delete('/books/:id', deleteBooks);
+
+
+
 async function getBooks(request, response, next) {
     try {
         let results = await Book.find();
@@ -33,6 +34,37 @@ async function getBooks(request, response, next) {
         next(error);
     }
 }
+
+
+async function postBooks(request, response, next){
+    // console.log(request.body);
+    try {
+      let createBook = await Book.create(request.body);
+      response.status(200).send(createBook);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+
+
+  async function deleteBooks(request, response, next){
+    console.log(request.params.id);
+    try {
+      
+      let id = request.params.id;
+      await Book.findByIdAndDelete(id);
+      response.status(200).send('Book was deleted.');
+    } catch (error) {
+      next(error);
+    }
+  }
+
+
+
+
+
+
 app.get('*', (request, response) => {
     response.status(404).send('Not available');
 });
