@@ -3,23 +3,23 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const mongoose = require('mongoose');
+
 const app = express();
 app.use(cors());
-
-
-const mongoose = require('mongoose');
+app.use(express.json());
 
 mongoose.connect(
     process.env.URL_DB
 )
     .then(() => console.log('Mongo DB is connected!'))
     .catch(e => console.log(e));
+
 const Book = require('./models/book.js');
 const PORT = process.env.PORT || 5005;
 
 
 app.get('/', (request, response) => response.status(200).send('Welcome!'));
-
 app.get('/books', getBooks);
 app.post('/books', postBooks);
 // app.delete('/books/:id', deleteBooks);
@@ -37,7 +37,7 @@ async function getBooks(request, response, next) {
 
 
 async function postBooks(request, response, next){
-    // console.log(request.body);
+    // console.log("heyuuu", request.body);
     try {
       let createBook = await Book.create(request.body);
       response.status(200).send(createBook);
