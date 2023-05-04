@@ -22,7 +22,7 @@ async function seed(){
   await Book.create([{
     title: '20,000 Leagues Under The Sea',
     description: 'Captain Nemo and his submarine Nautilus, as seen from the perspective of Professor Pierre Aronnax after he, his servant Conseil, and Canadian whaler Ned Land wash up on their ship. On the Nautilus, the three embark on a journey which has them going all around the world, under the sea.',
-    status: true,
+    status: true
   }]);
   console.log('Book 2!!')
 
@@ -38,9 +38,9 @@ async function seed(){
     description: 'An autobiography, written by Martin Pistorius, telling his story about how he overcame a life changing illness. Pistorius writes to readers to explain his miraculous life story, and how an unknown illness left him trapped inside his own body at the age of nine.',
     status: true
   }]);
-  console.log('Book 3!!')
+  console.log('Book 4!!')
 
-  console.log('Closing the DB connection for our seed file');
+  // console.log('Closing the DB connection for our seed file');
   mongoose.disconnect();
 }
 
