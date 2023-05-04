@@ -23,6 +23,7 @@ app.get('/', (request, response) => response.status(200).send('Welcome!'));
 app.get('/books', getBooks);
 app.post('/books', postBooks);
 app.delete('/books/:id', deleteBooks);
+app.put('/books/:id', updateBooks);
 
 
 
@@ -59,6 +60,27 @@ async function postBooks(request, response, next){
     }
   }
 
+
+  async function updateBooks(request, response, next){
+    // console.log('id', request.params.id);
+    
+    let id = request.params.id;
+    let bookData = request.body;
+    // console.log(id, bookData);
+    try {
+      let updatedBook = await Book.findByIdAndUpdate(id, bookData, {
+        new: true,
+        overwrite: true
+      });
+      console.log('UPDATEDDD BOOK',updatedBook);
+      response.status(200).send('ok for now');
+    } catch (error) {
+      next(error);
+    }
+
+
+  
+  }
 
 
 
